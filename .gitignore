@@ -173,3 +173,5 @@ cython_debug/
 *.vsix
 
 .DS_Store
+elliptic_curves.m
+elliptic_curves.sage
