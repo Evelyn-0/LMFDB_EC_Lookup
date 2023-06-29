@@ -6,7 +6,7 @@ api_base = 'https://www.lmfdb.org/api/ec_nfcurves/'
 # properties to filter the data by as key=value pairs seperated by &
 api_query = '?field_label=2.2.5.1'
 # language to output data for
-format = 'sage'  # only sage and magma supported
+format = 'magma'  # only sage and magma supported
 limit = 10000  # API limit for LMFDB
 # list of keys to grab with each entry
 curve_data = ['short_label', 'ainvs', 'torsion_structure', 'torsion_primes', 'torsion_order', 'semistable', 'signature', 'q_curve',
@@ -35,7 +35,7 @@ def write_data(properties, format, file):
         if (n % 100 == 0):
             next_request = api_url + str(n)
             response = requests.get(next_request)
-            data = json.loads(json.dumps(response.json()))
+            data = response.json()
             print(n, '/', limit)
         # this if statement avoids crashes due to end of entries
         if n % 100 < len(data['data']):
