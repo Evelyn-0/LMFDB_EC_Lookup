@@ -176,3 +176,4 @@ cython_debug/
 elliptic_curves.m
 elliptic_curves.sage
 elliptic_curves_over_q.sage
+*.sage

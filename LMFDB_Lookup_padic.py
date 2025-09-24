@@ -4,15 +4,14 @@ import random
 import time
 # List of collections and properties can be found at https://www.lmfdb.org/api/
 # LMFDB collection to choose from
-api_base = 'https://www.lmfdb.org/api/ec_curvedata/'
+api_base = 'https://www.lmfdb.org/api/lf_fields/'
 # properties to filter the data by as key=value pairs seperated by &
-api_query = '?conductor=5'
+api_query = '?'
 # language to output data for
 format = 'sage'  # only sage and magma supported
-limit = 500   # API limit for LMFDB
+limit = 10000   # API limit for LMFDB
 # list of keys to grab with each entry
-curve_data = ['lmfdb_label', 'ainvs', 'torsion_structure', 'torsion_primes', 'torsion', 'semistable',
-              'potential_good_reduction', 'bad_primes', 'cm', 'class_deg', 'conductor', 'jinv']
+curve_data = ['new_label', 'n', 'p', 'c', 'e', 'subfield']
 
 api_url = api_base + api_query + '&_format=json&_offset='
 
@@ -44,7 +43,8 @@ def write_data(properties, format, file):
             except:
                 print(n, '/', limit, '  Bad data')
                 n=n+100
-                continue
+                # continue
+                break
             else:
                 print(n, '/', limit)
         # this if statement avoids crashes due to end of entries
@@ -64,7 +64,7 @@ def write_data(properties, format, file):
 
 
 if format == 'sage':
-    f = open('elliptic_curves_over_q.sage', 'w')
+    f = open('padic_fields.sage', 'w')
     f.write('R.<x> = QQ[];\n')
     f.write('data = [\n')
 
